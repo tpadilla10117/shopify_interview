@@ -1,0 +1,32 @@
+.table-parent-container {
+
+
+
+    .table-wrapper {
+        border: 1px solid red;
+       /*  display: grid;
+        grid-template-columns: 33% 33% 33%; */
+
+
+        /* Define amount of columns */
+        /* Define rows */
+        /* columns ->
+        
+            rows -> 
+        
+        */
+
+        .table-headings {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+
+        .table-rows {
+            border: 1px solid blue;
+            display: grid;
+        grid-template-columns: 33% 33% 33%;
+        }
+    }
+
+}
