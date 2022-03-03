@@ -1,11 +1,5 @@
 /*This is the global store to handle state in the app:  */
     import { configureStore } from "@reduxjs/toolkit";
-    import navReducer from '../reduxslices/navSlice.js';
-    import modalReducer from '../reduxslices/modalSlice';
-    import authReducer from '../reduxslices/authSlice';
-    import authMessageReducer from '../reduxslices/authmessageSlice';
-    import basketReducer from '../reduxslices/basketslice';
-    import productReducer from '../reduxslices/productSlice.js';
 
 
 /* To change State: 
@@ -16,13 +10,8 @@
 
 */
 
-    export const store = configureStore({
+   /*  export const store = configureStore({
         reducer: {
-            nav: navReducer,
-            modal: modalReducer,
-            message: authMessageReducer,
-            auth: authReducer,
-            basket: basketReducer,
-            products: productReducer,
+           
         }
-    });
+    }); */
