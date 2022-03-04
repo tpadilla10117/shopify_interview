@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 function Table() {
 
-    const [btnPressed, setBtnPressed] = useState(false);
     let ListTemplate;
-    let initialRender = useRef(true);
-    
+    const [newSearch, setNewSearch] = useState()
     const [query, setQuery] = useState('');
     let lowerCasedQuerys = query.toLowerCase();
 
@@ -21,7 +19,7 @@ function Table() {
         {id: 226912, name: "Desk lamp", description: "Because who wants a dark office?", price: 6000}
        ]);
 
-      /*  let items = [
+       /* let items = [
         {id: 198355, name: "Fancy pen", description: "Write in red or blue!", price: 1000},
         {id: 168031, name: "Bad pen", description: "Barely works, not worth the money", price: 2000},
         {id: 296110, name: "Fabric softener", description: "From the other leading brand ", price: 1850},  
@@ -46,28 +44,36 @@ function Table() {
         let lowerCasedQuery = query.toLowerCase();
         let newItems =[];
 
-        for(let i = 0; i < items.length; i++) {
-
-            if(items[i].name.toLowerCase().includes(lowerCasedQuery) || items[i].description.toLowerCase().includes(lowerCasedQuery)) {
-                console.log(items[i] ) /* I've found the correct matches at this point */
-                
-            newItems.push(items[i])
-                
-            } 
+        const result = items.filter(filteredItems);
+        function filteredItems(item) {
+            if(item.name.toLowerCase().includes(lowerCasedQuery) || item.description.toLowerCase().includes(lowerCasedQuery)) {
+                console.log(item)
+                return item
+            }
             
         }
-        /* return alert('submitted') */
-        console.log(newItems)
-        setItems(newItems)
-        /* console.log(items) */
-        
+        console.log(result);
+        setNewSearch(result)
+        /* setItems(result) */
+        return result;    
        
     }
 
+
+    /* function filterItems(item) {
+        let lowerCasedQuery = query.toLowerCase();
+        for(let i = 0; i < item.length; i++) {
+            if(item[i].name.toLowerCase().includes(lowerCasedQuery) || item[i].description.toLowerCase().includes(lowerCasedQuery)) {
+                return item[i]
+            }
+        }
+
+    } */
+
     useEffect( () => {
         
-        console.log(items)
-    },[items])
+        console.log(newSearch)
+    },[newSearch])
 
     /* for(let i = 0; i < items.length; i++) {
         if(items[i].name.toLowerCase().includes(lowerCasedQuerys) || items[i].description.toLowerCase().includes(lowerCasedQuerys)) {
@@ -86,35 +92,6 @@ function Table() {
         }
     } */
     
-/* Need to update state based on return of query
-
-    - needs to have initial values on first render
-    - subsequent renders get the updated values
-*/
-
-    /* function buttonToggle() {
-       if(btnPressed === true) {
-           setBtnPressed(false)
-       } else if (btnPressed === false) {
-           setBtnPressed(true)
-       }
-    }
-
-    useEffect(() => {
-        
-        if(initialRender.current) {
-            initialRender.current = false;
-        } else {
-            
-            let newValue = inputHandler();
-            console.log(newValue);
-            setItems(newValue);
-        }
-
-    }, [btnPressed])
-    console.log(btnPressed) */
-    
-
     /* function clickHandler() {
        ListTemplate = items.map( (data) => {
             if(data.name.toLowerCase().includes(lowerCasedQuerys) || data.description.toLowerCase().includes(lowerCasedQuerys) ) 
@@ -131,8 +108,7 @@ function Table() {
         })
     } */
 
-    
-    
+
 
   return (
 
@@ -172,7 +148,7 @@ function Table() {
                             <p className='table-price-cell'>{data.price}</p>
                         </div>
                         )
-                        
+                        s
                        
                         
                     })
@@ -180,7 +156,7 @@ function Table() {
             } */}
               {
                   
-            
+                !newSearch ?
                     items.map( (data) => {
                         
                         return (
@@ -193,6 +169,18 @@ function Table() {
                        
                     })
             
+                    :
+                    newSearch.map((data) => {
+                        
+                        return (
+                        <div id={data.id} key={data.id} className="table-rows">
+                            <h1 className='table-name-cell'>{data.name}</h1>
+                            <p className='table-description-cell'>{data.description}</p>
+                            <p className='table-price-cell'>{data.price}</p>
+                        </div>
+                        )
+                       
+                    })
 
               }
 
