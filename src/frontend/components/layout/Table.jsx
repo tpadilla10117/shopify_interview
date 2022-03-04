@@ -46,13 +46,22 @@ function Table() {
 
             if(items[i].name.toLowerCase().includes(lowerCasedQuery) || items[i].description.toLowerCase().includes(lowerCasedQuery)) {
                 console.log(items[i] ) /* I've found the correct matches at this point */
-                let test = items[i]
-                console.log("Here are the indexes: ", items.indexOf(test)) /* I get back the index of the proper items */
-                       
+                
+                /* let test = items[i] */
+                /* console.log("Here are the indexes: ", items.indexOf(test)) */ /* I get back the index of the proper items */
+
+               /*  items.filter(function(find) {
+                    if(find.name || find.description === lowerCasedQuery) {
+                        console.log(items[i])
+                    }
+                    return find
+                }) */
+               
+               
             } 
             
         }
-        console.log("Items outputted: ", items)
+        
     }
     
 /* Need to update state based on return of query
@@ -82,6 +91,7 @@ function Table() {
 
     }, [btnPressed])
     console.log(btnPressed) */
+    let lowerCasedQuerys = query.toLowerCase();
 
   return (
 
@@ -108,9 +118,10 @@ function Table() {
                     </div>
                 
                 </div>
-            
-                {
+                
+            {
                     items.map( (data) => {
+                        if(data.name.toLowerCase().includes(lowerCasedQuerys) || data.description.toLowerCase().includes(lowerCasedQuerys) ) {
                         return (
                         <div id={data.id} key={data.id} className="table-rows">
                             <h1 className='table-name-cell'>{data.name}</h1>
@@ -118,9 +129,17 @@ function Table() {
                             <p className='table-price-cell'>{data.price}</p>
                         </div>
                         )
+                        } else {
+                            return <p key={data.id}>No results found</p>
+                        }
+                        
                     })
 
                 }
+
+               
+
+                {/* <p>No results found</p> */}
 
             </div>
         
