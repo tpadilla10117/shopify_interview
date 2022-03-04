@@ -67,32 +67,35 @@ function Table() {
 
         </div>
         
-            <div className="table-wrapper">
-                <div className="table-rows">
-                    <div className='table-heading'>
-                        Name
-                    </div>
-                    <div className='table-heading'>
-                        Description
-                    </div>
-                    <div className='table-heading'>
-                        Price
-                    </div>
+            <table className="table-wrapper">
+                <tbody>
+                    <tr className='table-rows'>
+                        <td className='table-heading'>
+                            Name
+                        </td>
+                        <td className='table-heading'>
+                            Description
+                        </td>
+                        <td className='table-heading'>
+                            Price
+                        </td>
+                    </tr>
                 
-                </div>
+                </tbody>
 
         {/* If newSearch does not have content, show the original items state, else show the filtered data: */}
+            <tbody>
               {
                   
                 !newSearch ?
                     items.map( (data) => {
                         
                         return (
-                        <div id={data.id} key={data.id} className="table-rows">
-                            <h1 className='table-name-cell'>{data.name}</h1>
-                            <p className='table-description-cell'>{data.description}</p>
-                            <p className='table-price-cell'>{data.price}</p>
-                        </div>
+                        <tr id={data.id} key={data.id} className="table-rows">
+                            <td className='table-name-cell'>{data.name}</td>
+                            <td className='table-description-cell'>{data.description}</td>
+                            <td className='table-price-cell'>{data.price}</td>
+                        </tr>
                         )
                        
                     })
@@ -101,18 +104,19 @@ function Table() {
                     newSearch.map((data) => {
                         
                         return (
-                        <div id={data.id} key={data.id} className="table-rows">
-                            <h1 className='table-name-cell'>{data.name}</h1>
-                            <p className='table-description-cell'>{data.description}</p>
-                            <p className='table-price-cell'>{data.price}</p>
-                        </div>
+                        <tr id={data.id} key={data.id} className="table-rows">
+                            <td className='table-name-cell'>{data.name}</td>
+                            <td className='table-description-cell'>{data.description}</td>
+                            <td className='table-price-cell'>{data.price}</td>
+                        </tr>
                         )
                        
                     })
 
               }
+              </tbody>
 
-            </div>
+            </table>
                 
     </section>
   )
