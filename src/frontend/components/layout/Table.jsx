@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, /* useEffect  */} from 'react';
 
 
 function Table() {
 
+/* State values for a new query & a filtered search: */
     const [newSearch, setNewSearch] = useState()
     const [query, setQuery] = useState('');
 
@@ -17,6 +18,7 @@ function Table() {
         {id: 226912, name: "Desk lamp", description: "Because who wants a dark office?", price: 6000}
        ]);
        
+/* Handler that takes value of input field from .table-searchbar  */
     function inputHandler() {
         if (query === "" || query === null ) {
             console.log("You cannot search without entering in a term!")
@@ -24,9 +26,7 @@ function Table() {
             return;
         }
 
-        console.log(query)
-        
-
+    /* I lowercase the input value since case insensitive, initialize my items state to a filtered value using .toLowerCase() & .includes() to check for any instance of the query:  */
         let lowerCasedQuery = query.toLowerCase();
 
         const result = items.filter(filteredItems);
@@ -34,20 +34,25 @@ function Table() {
             if(item.name.toLowerCase().includes(lowerCasedQuery) || item.description.toLowerCase().includes(lowerCasedQuery)) {
                 console.log(item)
                 return item
-            }
+            } 
             
         }
         console.log(result);
         setNewSearch(result)
         
-        return result;    
-       
-    }
+        if(result.length === 0) {
+            return alert("No results found")
+        } else {
+            return result
+        }
+        /* return result; */
+    };
 
-    useEffect( () => {
+/* Checks the result of the search: */
+   /*  useEffect( () => {
         
         console.log(newSearch)
-    },[newSearch])
+    },[newSearch]) */
 
 
   return (
@@ -58,7 +63,7 @@ function Table() {
             <input className='table-searchbar' type="text" placeholder='Search for Products...' /* ref={searchRef} */ value={query}  onChange={event => setQuery(event.target.value)} >
             </input>
 
-            <button id='button' onClick={inputHandler}>Search</button>
+            <button id='searchbar-button' onClick={inputHandler}>Search</button>
 
         </div>
         
@@ -75,7 +80,8 @@ function Table() {
                     </div>
                 
                 </div>
-                
+
+        {/* If newSearch does not have content, show the original items state, else show the filtered data: */}
               {
                   
                 !newSearch ?
@@ -103,12 +109,8 @@ function Table() {
                         )
                        
                     })
-                    
-
 
               }
-
-                {/* <p>No results found</p> */}
 
             </div>
                 
