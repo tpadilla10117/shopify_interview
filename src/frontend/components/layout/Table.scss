@@ -1,32 +1,24 @@
 .table-parent-container {
 
-
-
     .table-wrapper {
-        border: 1px solid red;
-       /*  display: grid;
-        grid-template-columns: 33% 33% 33%; */
+        border: 2px solid black;
+       
 
-
-        /* Define amount of columns */
-        /* Define rows */
-        /* columns ->
-        
-            rows -> 
-        
-        */
-
-        .table-headings {
+        .table-heading {
             display: flex;
             justify-content: space-evenly;
+            font-size: $p-txt-size;
+            /* border: 1px solid blue; */
+            padding: 10px;
         }
 
 
         .table-rows {
-            border: 1px solid blue;
+            border: 1px solid green;
             display: grid;
-        grid-template-columns: 33% 33% 33%;
+            grid-template-columns: 33% 33% 33%;
         }
+            
     }
 
 }
