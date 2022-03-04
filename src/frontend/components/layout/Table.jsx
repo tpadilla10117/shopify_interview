@@ -4,10 +4,11 @@ import React, { useState, useEffect, useRef } from 'react';
 function Table() {
 
     const [btnPressed, setBtnPressed] = useState(false);
-    
+    let ListTemplate;
     let initialRender = useRef(true);
-
+    
     const [query, setQuery] = useState('');
+    let lowerCasedQuerys = query.toLowerCase();
 
     const [items, setItems] = useState([
         {id: 198355, name: "Fancy pen", description: "Write in red or blue!", price: 1000},
@@ -31,38 +32,59 @@ function Table() {
         {id: 226912, name: "Desk lamp", description: "Because who wants a dark office?", price: 6000}
        ]; */
 
+       
     function inputHandler() {
         if (query === "" ) {
             console.log("You cannot search without entering in a term!")
+            alert("You cannot search without entering in a term!")
             return;
         }
 
         console.log(query)
+        
 
         let lowerCasedQuery = query.toLowerCase();
-        /* let newItems =[]; */
+        let newItems =[];
 
         for(let i = 0; i < items.length; i++) {
 
             if(items[i].name.toLowerCase().includes(lowerCasedQuery) || items[i].description.toLowerCase().includes(lowerCasedQuery)) {
                 console.log(items[i] ) /* I've found the correct matches at this point */
                 
-                /* let test = items[i] */
-                /* console.log("Here are the indexes: ", items.indexOf(test)) */ /* I get back the index of the proper items */
-
-               /*  items.filter(function(find) {
-                    if(find.name || find.description === lowerCasedQuery) {
-                        console.log(items[i])
-                    }
-                    return find
-                }) */
-               
-               
+            newItems.push(items[i])
+                
             } 
             
         }
+        /* return alert('submitted') */
+        console.log(newItems)
+        setItems(newItems)
+        /* console.log(items) */
         
+       
     }
+
+    useEffect( () => {
+        
+        console.log(items)
+    },[items])
+
+    /* for(let i = 0; i < items.length; i++) {
+        if(items[i].name.toLowerCase().includes(lowerCasedQuerys) || items[i].description.toLowerCase().includes(lowerCasedQuerys)) {
+            
+
+            ListTemplate = items.map((data) =>
+                <div id={data.id} key={data.id} className="table-rows">
+                    <h1 className='table-name-cell'>{data.name}</h1>
+                    <p className='table-description-cell'>{data.description}</p>
+                    <p className='table-price-cell'>{data.price}</p>
+                </div>
+            )
+            
+        } else {
+            ListTemplate = <p>No Results Found</p>
+        }
+    } */
     
 /* Need to update state based on return of query
 
@@ -91,17 +113,36 @@ function Table() {
 
     }, [btnPressed])
     console.log(btnPressed) */
-    let lowerCasedQuerys = query.toLowerCase();
+    
+
+    /* function clickHandler() {
+       ListTemplate = items.map( (data) => {
+            if(data.name.toLowerCase().includes(lowerCasedQuerys) || data.description.toLowerCase().includes(lowerCasedQuerys) ) 
+            return (
+            <div id={data.id} key={data.id} className="table-rows">
+                <h1 className='table-name-cell'>{data.name}</h1>
+                <p className='table-description-cell'>{data.description}</p>
+                <p className='table-price-cell'>{data.price}</p>
+            </div>
+            )
+            
+           
+            
+        })
+    } */
+
+    
+    
 
   return (
 
     <section className='table-parent-container'>
 
         <div className='table-searchbar-parent-container'>
-            <input className='table-searchbar' type="text" placeholder='Search for Products...' /* ref={searchRef} */ value={query}  onChange={event => setQuery(event.target.value)}>
+            <input className='table-searchbar' type="text" placeholder='Search for Products...' /* ref={searchRef} */ value={query}  onChange={event => setQuery(event.target.value)} >
             </input>
 
-            <button onClick={inputHandler}>Search</button>
+            <button id='button' onClick={inputHandler}>Search</button>
 
         </div>
         
@@ -118,10 +159,12 @@ function Table() {
                     </div>
                 
                 </div>
+
+                {ListTemplate}
                 
-            {
+            {/* {
                     items.map( (data) => {
-                        if(data.name.toLowerCase().includes(lowerCasedQuerys) || data.description.toLowerCase().includes(lowerCasedQuerys) ) {
+                        if(data.name.toLowerCase().includes(lowerCasedQuerys) || data.description.toLowerCase().includes(lowerCasedQuerys) ) 
                         return (
                         <div id={data.id} key={data.id} className="table-rows">
                             <h1 className='table-name-cell'>{data.name}</h1>
@@ -129,13 +172,29 @@ function Table() {
                             <p className='table-price-cell'>{data.price}</p>
                         </div>
                         )
-                        } else {
-                            return <p key={data.id}>No results found</p>
-                        }
+                        
+                       
                         
                     })
 
-                }
+            } */}
+              {
+                  
+            
+                    items.map( (data) => {
+                        
+                        return (
+                        <div id={data.id} key={data.id} className="table-rows">
+                            <h1 className='table-name-cell'>{data.name}</h1>
+                            <p className='table-description-cell'>{data.description}</p>
+                            <p className='table-price-cell'>{data.price}</p>
+                        </div>
+                        )
+                       
+                    })
+            
+
+              }
 
                
 
