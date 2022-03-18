@@ -53,13 +53,14 @@ function Table() {
         
         console.log(newSearch)
     },[newSearch]) */
-
+console.log("We re-rendered!")
 
   return (
 
     <section className='table-parent-container'>
 
         <div className='table-searchbar-parent-container'>
+            {/* TODO: Form triggers re-render every time I type in the input field -> need to debug*/}
             <input className='table-searchbar' type="text" placeholder='Search for Products...' /* ref={searchRef} */ value={query}  onChange={event => setQuery(event.target.value)} >
             </input>
 
