@@ -3,9 +3,10 @@
 
     .table-searchbar-container {
 
-
+        height: 40px;
+        
         .table-searchbar {
-
+            height: 100%;
         }
     }
 
@@ -17,7 +18,7 @@
             grid-template-columns: 1fr 1fr 1fr;
             /* border: 1px solid green; */
 
-            .table-heading, .table-name-cell {
+            .table-heading, .table-cell {
                 display: flex;
                 justify-content: space-evenly;
                 padding: 10px;

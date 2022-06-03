@@ -34,6 +34,10 @@ import React, { useState } from 'react';
 
         - 5) if no results, return 'No Results Found' instead of product grid
 
+         else dynamically render in react based on some conditions...
+
+            - 
+
 */
 
 function Table2() {
@@ -49,11 +53,31 @@ function Table2() {
         {id: 226912, name: "Desk lamp", description: "Because who wants a dark office?", price: 6000}
        ]);
 
-       const [ query, setQuery ] = useState('')
-
+       const [ query, setQuery ] = useState('');
+       const [ newSearch, setNewSearch ] = useState();
 
        function searchInputHandler() {
-           console.log(query)
+           let lowerCasedQuery = query.toLowerCase().trim();
+           const resultOfQuery = items.filter(filteredItems);
+            console.log('my trimmed string: ', lowerCasedQuery)
+           if( query === '' || query === null) {
+               alert('You cannot search without entering in a term!')
+               return;
+           };
+    
+           function filteredItems(item) {
+                if(item.name.toLowerCase().includes(lowerCasedQuery) || item.description.toLowerCase().includes(lowerCasedQuery)) {
+                    return item;
+                }
+           };
+
+           setNewSearch(resultOfQuery);
+
+           if(resultOfQuery.length === 0) {
+               return alert('No results found')
+           } else {
+               return resultOfQuery;
+           }
        };
 
 
@@ -93,27 +117,48 @@ function Table2() {
             </tbody>
 
             <tbody>
+                { !newSearch ?
+                    items.map( (tabledata) => {
 
-                {items.map( (tabledata) => {
-                    return (
-                        <tr
-                            id={tabledata.id}
-                            key={tabledata.id}
-                            className='table-rows'
-                        >
-                            <td className='table-name-cell'>
-                                {tabledata.name}
-                            </td>
-                            <td className='table-name-cell'>
-                                {tabledata.description}
-                            </td>
-                            <td className='table-name-cell'>
-                                {tabledata.price}
-                            </td>
+                        let num = tabledata.price;
 
+                        return (
+                            <tr
+                                id={tabledata.id}
+                                key={tabledata.id}
+                                className='table-rows'
+                            >
+                                <td className='table-cell'>
+                                    {tabledata.name}
+                                </td>
+                                <td className='table-cell'>
+                                    {tabledata.description}
+                                </td>
+                                <td className='table-cell'>
+                                    {(num / 100).toFixed(2)}
+                                </td>
+    
+                            </tr>
+                        )
+                    })
+
+                    :
+
+                    newSearch.map((data) => {
+                        let dataNum = data.price;
+
+                        return (
+                        <tr id={data.id} key={data.id} className="table-rows">
+                            <td className='table-cell'>{data.name}</td>
+                            <td className='table-cell'>{data.description}</td>
+                            <td className='table-cell'>{(dataNum / 100).toFixed(2)}</td>
                         </tr>
-                    )
-                })}
+                        )
+                       
+                    })
+
+                }
+                
             </tbody>
 
         </table>
