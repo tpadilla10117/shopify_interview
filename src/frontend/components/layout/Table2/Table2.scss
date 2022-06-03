@@ -1,0 +1,29 @@
+.table-parent-container {
+
+
+    .table-searchbar-container {
+
+
+        .table-searchbar {
+
+        }
+    }
+
+    .table-wrapper {
+        /* border: 2px solid black; */
+
+        .table-rows {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            /* border: 1px solid green; */
+
+            .table-heading, .table-name-cell {
+                display: flex;
+                justify-content: space-evenly;
+                padding: 10px;
+                border: 1px solid black;
+            }
+        }
+    }
+
+}

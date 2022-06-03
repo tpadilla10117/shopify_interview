@@ -2,7 +2,7 @@
 
     /* "layout" components: */
     export { default as Table } from '../../frontend/components/layout/Table.jsx';
-    
+    export { default as Table2 } from '../../frontend/components/layout/Table2/Table2.jsx';
 
 
 /* -------------------------------------------------------------------------- */
